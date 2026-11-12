@@ -2,9 +2,9 @@
 
 Personal portfolio highlighting software engineering, data, quality, and game development projects.
 
-## Deployment
+## Live site
 
-This static site is ready to be published with GitHub Pages from the repository root.
+https://brennocurtolo.github.io/brenno-cavalcanti-portfolio/
 
 ## Projects
 
