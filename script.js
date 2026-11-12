@@ -3,10 +3,6 @@ const navigation = document.querySelector("#primary-navigation");
 const currentSectionIndicator = document.querySelector("#current-section");
 const currentYear = document.querySelector("#current-year");
 const contactCopyStatus = document.querySelector("#contact-copy-status");
-const projectVideo = document.querySelector("#survival-hunt-video");
-const videoPreview = projectVideo?.closest("[data-video-preview]");
-const videoPlayback = videoPreview?.querySelector(".video-playback");
-const videoStatus = videoPreview?.querySelector(".video-status");
 const sectionNavigation = document.querySelectorAll('.navigation a[href^="#"]');
 const navigableSections = Array.from(sectionNavigation)
   .map((link) => document.querySelector(link.getAttribute("href")))
@@ -105,84 +101,4 @@ if (sectionNavigation.length && navigableSections.length) {
   window.addEventListener("resize", scheduleActiveSectionUpdate);
   window.addEventListener("hashchange", scheduleActiveSectionUpdate);
   updateActiveSection();
-}
-
-if (
-  projectVideo instanceof HTMLVideoElement &&
-  videoPreview instanceof HTMLElement &&
-  videoPlayback instanceof HTMLButtonElement &&
-  videoStatus instanceof HTMLElement
-) {
-  const restoreSilentPreview = (message = "") => {
-    projectVideo.muted = true;
-    projectVideo.loop = true;
-    projectVideo.controls = false;
-    videoPreview.classList.remove("is-playing");
-    videoPlayback.hidden = false;
-    videoStatus.textContent = message;
-
-    const previewPlayback = projectVideo.play();
-    if (previewPlayback) {
-      previewPlayback.catch((error) => {
-        videoStatus.textContent = "The silent video preview could not resume.";
-        console.error("Could not resume the Survival Hunt preview.", error);
-      });
-    }
-  };
-  let playbackTimeout;
-
-  const playWalkthroughFromStart = () => {
-    if (projectVideo.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      projectVideo.currentTime = 0;
-    }
-
-    window.clearTimeout(playbackTimeout);
-    playbackTimeout = window.setTimeout(() => {
-      if (projectVideo.paused) {
-        restoreSilentPreview("The walkthrough is taking too long to load. Please try again.");
-      }
-    }, 30000);
-
-    const playback = projectVideo.play();
-    if (playback) {
-      playback
-        .then(() => {
-          window.clearTimeout(playbackTimeout);
-          videoStatus.textContent = "";
-        })
-        .catch((error) => {
-          restoreSilentPreview("The walkthrough could not start. The silent preview has been restored.");
-          console.error("Could not start the Survival Hunt walkthrough.", error);
-        });
-    }
-  };
-
-  videoPlayback.addEventListener("click", () => {
-    projectVideo.pause();
-    projectVideo.muted = false;
-    projectVideo.loop = false;
-    projectVideo.controls = true;
-    videoStatus.textContent = "Starting the walkthrough.";
-    playWalkthroughFromStart();
-  });
-  projectVideo.addEventListener("playing", () => {
-    window.clearTimeout(playbackTimeout);
-    if (!projectVideo.muted) {
-      videoPreview.classList.add("is-playing");
-      videoPlayback.hidden = true;
-      videoStatus.textContent = "";
-    }
-  });
-  projectVideo.addEventListener("ended", () => {
-    projectVideo.currentTime = 0;
-    restoreSilentPreview();
-  });
-  projectVideo.addEventListener("error", () => {
-    if (!projectVideo.muted) {
-      restoreSilentPreview("The walkthrough could not be loaded. The silent preview has been restored.");
-      return;
-    }
-
-    videoStatus.textContent = "The silent video preview could not be loaded.";
-  });
 }
