@@ -77,19 +77,31 @@
                 <p class="project-description">A 3D survival game where players collect all the fish while evading hunters, navigating obstacles, and exploring snowy, icy, and mountainous terrain.</p>
                 <p class="project-detail">Features player movement, collisions, animations, collectibles, and pursuing enemies. Controls: WASD or arrow keys to move, Space to jump, and Shift to run.</p>
                 <div class="project-video" data-video-preview>
-                  <iframe
-                    src="https://drive.google.com/file/d/1LaQkL9u6B-sIt84LayIIC1i7RDkwUe9C/preview"
-                    title="Survival Hunt 3D game walkthrough"
-                    loading="lazy"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
+                  <video
+                    id="survival-hunt-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    aria-label="Silent looping preview of Survival Hunt gameplay"
+                  >
+                    <source src="survival-hunt-walkthrough-1080p.mp4" type="video/mp4">
+                    Your browser does not support embedded videos.
+                    <a href="survival-hunt-walkthrough-1080p.mp4">Open the Survival Hunt walkthrough</a>.
+                  </video>
+                  <button class="video-playback" type="button" aria-label="Watch the Survival Hunt walkthrough">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 5.75v12.5L19 12 9 5.75Z" fill="currentColor"/>
+                    </svg>
+                    <span>Watch walkthrough</span>
+                  </button>
+                  <p class="video-status" aria-live="polite"></p>
                 </div>
               </div>
               <div class="project-bottom">
                 <div class="tag-list"><span>Unity</span><span>C#</span><span>Blender</span></div>
                 <div class="project-actions">
-                  <a class="project-link" href="https://drive.google.com/file/d/1LaQkL9u6B-sIt84LayIIC1i7RDkwUe9C/view" target="_blank" rel="noreferrer">Watch walkthrough <span class="external-link-icon" aria-hidden="true"></span></a>
                   <a class="project-link" href="https://play.unity.com/pt/games/ba9dbfd1-f558-4ccf-8606-d77e90767b44/survival-hunt" target="_blank" rel="noreferrer">Play <span class="external-link-icon" aria-hidden="true"></span></a>
                   <a class="project-link" href="https://github.com/brennocurtolo/survival_hunt_game" target="_blank" rel="noreferrer">GitHub <span class="external-link-icon" aria-hidden="true"></span></a>
                 </div>

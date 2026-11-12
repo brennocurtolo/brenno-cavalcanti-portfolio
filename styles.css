@@ -486,11 +486,11 @@ button:focus-visible {
   box-shadow: 0 12px 30px rgba(0, 0, 0, .24);
 }
 
-.project-video iframe {
+.project-video video {
   width: 100%;
   aspect-ratio: 16 / 9;
   display: block;
-  border: 0;
+  object-fit: cover;
   background: #000;
 }
 
